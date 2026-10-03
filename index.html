@@ -554,7 +554,7 @@
 
             <div class="notice-box">
                 <i class="fas fa-info-circle"></i>
-                En los retoques de pestañas, se debe conservar al menos el 50% de las extensiones para aplicar tarifa de mantenimiento; de lo contrario, se cobrará servicio nuevo.
+                En los retoques de pestañas, la página indica que hay que conservar aproximadamente el 50% de las pestañas para que cuente como mantenimiento; de lo contrario, se cobra como un servicio nuevo.
             </div>
 
         </div>
@@ -622,7 +622,7 @@
             <div class="contact-wrapper">
                 <div>
                     <h3>Detalles de Atención</h3>
-                    <p>Agéndate directamente desde nuestro formulario o contáctanos por WhatsApp para coordinar tu cita.</p>
+                    <p>Agéndate directamente desde nuestro formulario pagando la seña online para coordinar tu cita.</p>
                     
                     <ul class="contact-info-list">
                         <li>
@@ -681,15 +681,15 @@
         <i class="fab fa-whatsapp"></i>
     </a>
 
-    <!-- Modal de Reserva con Seña del 50% -->
+    <!-- Modal de Reserva con Seña del 50% Integrada -->
     <div class="modal" id="bookingModal">
         <div class="modal-content">
             <span class="close-modal" onclick="closeBookingModal()">×</span>
             <h2 style="font-size: 2rem; margin-bottom: 5px;">Reservar Turno</h2>
             
             <div class="notice-box" style="margin: 10px 0 15px 0; padding: 10px 12px; font-size: 0.8rem;">
-                💗 Para reservar tu turno se requiere una seña del 50% del valor del servicio. El saldo restante se abona el día de la cita.<br>
-                <strong>⚠ La reserva queda confirmada una vez realizada la seña.</strong>
+                💗 Para reservar tu turno se requiere una seña del 50% del valor del servicio a abonarse en el siguiente paso vía Mercado Pago. El saldo restante se abona el día de la cita.<br>
+                <strong>⚠ La reserva queda confirmada automáticamente una vez procesado el pago.</strong>
             </div>
             
             <form id="bookingForm" onsubmit="handleBooking(event)">
@@ -767,7 +767,7 @@
                     <textarea id="bookingNotes" rows="2" placeholder="Aclaraciones adicionales"></textarea>
                 </div>
 
-                <button type="submit" id="btnSubmit" class="btn btn-primary" style="width: 100%;">CONTINUAR A RESERVAR</button>
+                <button type="submit" id="btnSubmit" class="btn btn-primary" style="width: 100%;">PAGAR SEÑA DEL 50% ONLINE</button>
             </form>
         </div>
     </div>
@@ -779,23 +779,60 @@
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
     <script src="https://npmcdn.com/flatpickr/dist/l10n/es.js"></script>
 
+    <!-- SDKs de Firebase Realtime Database -->
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
+
     <script>
+        // CONFIGURACIÓN DE TU PROYECTO DE FIREBASE
+        const firebaseConfig = {
+            apiKey: "REEMPLAZAR_CON_TU_API_KEY",
+            authDomain: "REEMPLAZAR_CON_TU_PROJECT.firebaseapp.com",
+            databaseURL: "https://REEMPLAZAR_CON_TU_PROJECT-default-rtdb.firebaseio.com",
+            projectId: "REEMPLAZAR_CON_TU_PROJECT"
+        };
+
+        if (!firebase.apps.length) {
+            firebase.initializeApp(firebaseConfig);
+        }
+        const db = firebase.database();
+
+        // URL de tu backend en producción que interactúa con Mercado Pago
+        const API_BACKEND_URL = "https://tu-api.com/api";
+
         const weekdayHours = ["09:00", "11:00", "13:00", "15:00", "17:00"];
         const saturdayHours = ["08:00", "10:00", "12:00", "14:00", "16:00"];
 
+        let flatpickrInstance = null;
+
         document.addEventListener("DOMContentLoaded", function() {
-            flatpickr("#bookingDate", {
+            flatpickrInstance = flatpickr("#bookingDate", {
                 locale: "es",
                 minDate: "today",
                 dateFormat: "Y-m-d",
-                disable: [function(date) { return (date.getDay() === 0); }], // Deshabilitar domingos
+                disable: [function(date) { return (date.getDay() === 0); }],
                 onChange: function(selectedDates, dateStr) {
                     if (selectedDates.length > 0) {
-                        renderTimeSlots(selectedDates[0]);
+                        renderTimeSlots(selectedDates[0], dateStr);
                     }
                 }
             });
+
+            checkPaymentStatusInUrl();
         });
+
+        function checkPaymentStatusInUrl() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const status = urlParams.get('pago');
+
+            if (status === 'exitoso') {
+                alert("¡Tu pago ha sido procesado con éxito! Tu reserva quedó confirmada.");
+                window.history.replaceState({}, document.title, window.location.pathname);
+            } else if (status === 'fallido') {
+                alert("Ocurrió un inconveniente con el pago. Por favor intenta nuevamente.");
+                window.history.replaceState({}, document.title, window.location.pathname);
+            }
+        }
 
         function updatePriceBreakdown() {
             const serviceSelect = id('serviceSelect').value;
@@ -820,9 +857,9 @@
             }
         }
 
-        function renderTimeSlots(selectedDate) {
+        function renderTimeSlots(selectedDate, dateStr) {
             const container = id('timeSlotsContainer');
-            container.innerHTML = '';
+            container.innerHTML = '<p style="font-size:0.85rem; color:#888; grid-column: span 3;">Cargando horarios...</p>';
             id('selectedTime').value = '';
 
             if (!selectedDate) return;
@@ -830,18 +867,77 @@
             const dayOfWeek = selectedDate.getDay();
             const availableHours = (dayOfWeek === 6) ? saturdayHours : weekdayHours;
 
+            let loaded = false;
+
+            const timeoutId = setTimeout(() => {
+                if (!loaded) {
+                    loaded = true;
+                    drawTimeSlots(availableHours, []);
+                }
+            }, 2500);
+
+            try {
+                db.ref('turnos').orderByChild('fecha').equalTo(dateStr).once('value')
+                    .then((snapshot) => {
+                        if (loaded) return;
+                        loaded = true;
+                        clearTimeout(timeoutId);
+
+                        const takenHours = [];
+                        const now = Date.now();
+                        const HOLD_TIME_MS = 15 * 60 * 1000;
+
+                        if (snapshot.exists()) {
+                            snapshot.forEach((childSnapshot) => {
+                                const booking = childSnapshot.val();
+                                if (booking.estado === 'confirmado') {
+                                    takenHours.push(booking.hora);
+                                } else if (booking.estado === 'pendiente_pago') {
+                                    const createdAt = booking.createdAt || 0;
+                                    if (now - createdAt < HOLD_TIME_MS) {
+                                        takenHours.push(booking.hora);
+                                    }
+                                }
+                            });
+                        }
+
+                        drawTimeSlots(availableHours, takenHours);
+                    })
+                    .catch((error) => {
+                        if (loaded) return;
+                        loaded = true;
+                        clearTimeout(timeoutId);
+                        drawTimeSlots(availableHours, []);
+                    });
+            } catch (err) {
+                if (!loaded) {
+                    loaded = true;
+                    clearTimeout(timeoutId);
+                    drawTimeSlots(availableHours, []);
+                }
+            }
+        }
+
+        function drawTimeSlots(availableHours, takenHours) {
+            const container = id('timeSlotsContainer');
+            container.innerHTML = '';
+
             availableHours.forEach(hour => {
                 const button = document.createElement('button');
                 button.type = 'button';
                 button.className = 'time-slot-btn';
                 button.textContent = hour;
 
-                button.onclick = function() {
-                    document.querySelectorAll('.time-slot-btn').forEach(btn => btn.classList.remove('selected'));
-                    button.classList.add('selected');
-                    id('selectedTime').value = hour;
-                };
-
+                if (takenHours.includes(hour)) {
+                    button.classList.add('disabled');
+                    button.disabled = true;
+                } else {
+                    button.onclick = function() {
+                        document.querySelectorAll('.time-slot-btn').forEach(btn => btn.classList.remove('selected'));
+                        button.classList.add('selected');
+                        id('selectedTime').value = hour;
+                    };
+                }
                 container.appendChild(button);
             });
         }
@@ -867,7 +963,8 @@
 
         function closeBookingModal() { id('bookingModal').style.display = 'none'; }
 
-        function handleBooking(e) {
+        // Función para procesar la reserva mediante cobro en la propia web con Mercado Pago
+        async function handleBooking(e) {
             e.preventDefault();
             
             const service = id('serviceSelect').value;
@@ -875,21 +972,59 @@
             const phone = id('clientPhone').value;
             const date = id('bookingDate').value;
             const time = id('selectedTime').value;
+            const notes = id('bookingNotes').value;
 
             if (!time) {
                 alert("Por favor selecciona un horario disponible.");
                 return;
             }
 
-            const message = `Hola Cin! Quisiera agendar un turno:%0A` +
-                            `• *Cliente:* ${encodeURIComponent(name)}%0A` +
-                            `• *Teléfono:* ${encodeURIComponent(phone)}%0A` +
-                            `• *Servicio:* ${encodeURIComponent(service)}%0A` +
-                            `• *Fecha:* ${encodeURIComponent(date)}%0A` +
-                            `• *Hora:* ${encodeURIComponent(time)}`;
+            // Obtener el precio numérico para calcular el 50% de la seña
+            const priceMatch = service.match(/\$\s*([\d\.]+)/);
+            if (!priceMatch) {
+                alert("Error al obtener el precio del servicio.");
+                return;
+            }
 
-            window.open(`https://wa.me/59896247696?text=${message}`, '_blank');
-            closeBookingModal();
+            const fullPrice = parseFloat(priceMatch[1].replace('.', ''));
+            const depositAmount = fullPrice * 0.5;
+
+            const btnSubmit = id('btnSubmit');
+            btnSubmit.disabled = true;
+            btnSubmit.textContent = "CONECTANDO CON MERCADO PAGO...";
+
+            try {
+                // Petición al servidor Backend para generar la orden/preferencia de pago en Mercado Pago
+                const response = await fetch(`${API_BACKEND_URL}/crear-preferencia-pago`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        servicio: service,
+                        clienteNombre: name,
+                        clienteTelefono: phone,
+                        fecha: date,
+                        hora: time,
+                        notas: notes,
+                        montoSena: depositAmount
+                    })
+                });
+
+                const data = await response.json();
+
+                if (response.ok && data.init_point) {
+                    // Redirige directamente al Checkout para realizar el pago de la seña en la web
+                    window.location.href = data.init_point;
+                } else {
+                    alert(data.error || "No se pudo iniciar el proceso de pago.");
+                    btnSubmit.disabled = false;
+                    btnSubmit.textContent = "PAGAR SEÑA DEL 50% ONLINE";
+                }
+            } catch (error) {
+                console.error("Error al procesar la reserva:", error);
+                alert("Ocurrió un error al conectar con el servidor de cobros.");
+                btnSubmit.disabled = false;
+                btnSubmit.textContent = "PAGAR SEÑA DEL 50% ONLINE";
+            }
         }
 
         function openLightbox(src) { id('lightboxImg').src = src; id('lightbox').style.display = 'flex'; }
