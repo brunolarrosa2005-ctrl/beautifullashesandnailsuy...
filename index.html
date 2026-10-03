@@ -47,38 +47,13 @@
             letter-spacing: 0.5px;
         }
 
-        a {
-            text-decoration: none;
-            color: inherit;
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-
-        .section-padding {
-            padding: 80px 0;
-        }
-
-        .section-title {
-            text-align: center;
-            margin-bottom: 50px;
-        }
-
-        .section-title h2 {
-            font-size: 2.8rem;
-            color: var(--dark-color);
-            margin-bottom: 10px;
-        }
-
-        .section-title p {
-            color: var(--gray-text);
-            font-size: 1rem;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-        }
+        a { text-decoration: none; color: inherit; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+        .section-padding { padding: 80px 0; }
+        
+        .section-title { text-align: center; margin-bottom: 50px; }
+        .section-title h2 { font-size: 2.8rem; color: var(--dark-color); margin-bottom: 10px; }
+        .section-title p { color: var(--gray-text); font-size: 1rem; text-transform: uppercase; letter-spacing: 2px; }
 
         .btn {
             display: inline-block;
@@ -95,530 +70,179 @@
             text-align: center;
         }
 
-        .btn-primary {
-            background-color: var(--dark-color);
-            color: var(--light-color);
-        }
-
-        .btn-primary:hover {
-            background-color: var(--deep-pink);
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(212, 136, 143, 0.4);
-        }
-
-        .btn-secondary {
-            background-color: transparent;
-            color: var(--dark-color);
-            border: 1px solid var(--dark-color);
-        }
-
-        .btn-secondary:hover {
-            background-color: var(--soft-pink);
-            border-color: var(--accent-pink);
-        }
+        .btn-primary { background-color: var(--dark-color); color: var(--light-color); }
+        .btn-primary:hover { background-color: var(--deep-pink); transform: translateY(-2px); box-shadow: 0 5px 15px rgba(212, 136, 143, 0.4); }
+        .btn-secondary { background-color: transparent; color: var(--dark-color); border: 1px solid var(--dark-color); }
+        .btn-secondary:hover { background-color: var(--soft-pink); border-color: var(--accent-pink); }
 
         header {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
+            position: fixed; top: 0; left: 0; width: 100%;
             background-color: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(5px);
-            z-index: 1000;
+            backdrop-filter: blur(5px); z-index: 1000;
             box-shadow: 0 2px 20px rgba(0, 0, 0, 0.03);
             transition: var(--transition);
         }
 
-        .navbar {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            height: 80px;
-        }
+        .navbar { display: flex; justify-content: space-between; align-items: center; height: 80px; }
+        .logo { font-family: var(--font-title); font-size: 1.5rem; font-weight: 700; color: var(--dark-color); text-transform: uppercase; letter-spacing: 1px; }
+        .logo span { color: var(--deep-pink); }
 
-        .logo {
-            font-family: var(--font-title);
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: var(--dark-color);
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .logo span {
-            color: var(--deep-pink);
-        }
-
-        .nav-links {
-            display: flex;
-            list-style: none;
-            gap: 30px;
-        }
-
-        .nav-links a {
-            font-size: 0.9rem;
-            font-weight: 500;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            transition: var(--transition);
-        }
-
-        .nav-links a:hover {
-            color: var(--deep-pink);
-        }
-
-        .hamburger {
-            display: none;
-            cursor: pointer;
-            font-size: 1.5rem;
-        }
+        .nav-links { display: flex; list-style: none; gap: 30px; }
+        .nav-links a { font-size: 0.9rem; font-weight: 500; text-transform: uppercase; letter-spacing: 1px; transition: var(--transition); }
+        .nav-links a:hover { color: var(--deep-pink); }
+        .hamburger { display: none; cursor: pointer; font-size: 1.5rem; }
 
         .hero {
             height: 100vh;
             background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), 
                         url('https://user-images.oopen.cloud/_/el:1/w:600/h:360/dpr:1/rt:fill/plain/merchants/15d91a15-614e-4950-a58e-ec3b8d6c384f/images/c5470d9b-d8d4-4cfb-9c16-dec0a8ce76ea.png') center/cover no-repeat;
-            display: flex;
-            align-items: center;
-            text-align: center;
-            position: relative;
-            padding-top: 80px;
+            display: flex; align-items: center; text-align: center; position: relative; padding-top: 80px;
         }
 
         .hero-content {
             background: rgba(255, 255, 255, 0.92);
-            backdrop-filter: blur(10px);
-            padding: 50px 30px;
-            border-radius: var(--border-radius);
-            max-width: 700px;
-            margin: 0 auto;
-            box-shadow: var(--shadow);
+            backdrop-filter: blur(10px); padding: 50px 30px;
+            border-radius: var(--border-radius); max-width: 700px; margin: 0 auto; box-shadow: var(--shadow);
         }
 
-        .hero h1 {
-            font-size: 3.2rem;
-            line-height: 1.1;
-            margin-bottom: 15px;
-            color: var(--dark-color);
-        }
-
-        .hero p {
-            font-size: 1.1rem;
-            color: var(--gray-text);
-            margin-bottom: 30px;
-        }
-
-        .hero-btns {
-            display: flex;
-            gap: 15px;
-            justify-content: center;
-        }
+        .hero h1 { font-size: 3.2rem; line-height: 1.1; margin-bottom: 15px; color: var(--dark-color); }
+        .hero p { font-size: 1.1rem; color: var(--gray-text); margin-bottom: 30px; }
+        .hero-btns { display: flex; gap: 15px; justify-content: center; }
 
         .category-header {
-            font-size: 1.8rem;
-            color: var(--dark-color);
-            margin: 40px 0 20px;
-            padding-bottom: 8px;
-            border-bottom: 2px solid var(--accent-pink);
-            display: flex;
-            align-items: center;
-            gap: 10px;
+            font-size: 1.8rem; color: var(--dark-color); margin: 40px 0 20px;
+            padding-bottom: 8px; border-bottom: 2px solid var(--accent-pink);
+            display: flex; align-items: center; gap: 10px;
         }
 
         .notice-box {
-            background-color: var(--soft-pink);
-            border-left: 4px solid var(--deep-pink);
-            padding: 15px 20px;
-            border-radius: 8px;
-            margin: 20px 0 30px;
-            font-size: 0.9rem;
-            color: var(--dark-color);
+            background-color: var(--soft-pink); border-left: 4px solid var(--deep-pink);
+            padding: 15px 20px; border-radius: 8px; margin: 20px 0 30px;
+            font-size: 0.9rem; color: var(--dark-color);
         }
 
-        .notice-box i {
-            color: var(--deep-pink);
-            margin-right: 8px;
-        }
+        .notice-box i { color: var(--deep-pink); margin-right: 8px; }
 
         .services-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 25px;
-            margin-bottom: 20px;
+            display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 25px; margin-bottom: 20px;
         }
 
         .service-card {
-            background: var(--light-color);
-            border-radius: var(--border-radius);
-            overflow: hidden;
-            box-shadow: var(--shadow);
-            transition: var(--transition);
-            border: 1px solid #f0f0f0;
-            display: flex;
-            flex-direction: column;
+            background: var(--light-color); border-radius: var(--border-radius);
+            overflow: hidden; box-shadow: var(--shadow); transition: var(--transition);
+            border: 1px solid #f0f0f0; display: flex; flex-direction: column;
         }
 
-        .service-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
-        }
-
-        .service-img {
-            height: 180px;
-            width: 100%;
-            object-fit: cover;
-        }
-
-        .service-info {
-            padding: 20px;
-            display: flex;
-            flex-direction: column;
-            flex-grow: 1;
-        }
-
-        .service-info h3 {
-            font-size: 1.2rem;
-            margin-bottom: 8px;
-        }
+        .service-card:hover { transform: translateY(-5px); box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1); }
+        .service-img { height: 180px; width: 100%; object-fit: cover; }
+        .service-info { padding: 20px; display: flex; flex-direction: column; flex-grow: 1; }
+        .service-info h3 { font-size: 1.2rem; margin-bottom: 8px; }
 
         .service-meta {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-top: auto;
-            padding-top: 15px;
-            border-top: 1px dashed #eee;
+            display: flex; justify-content: space-between; align-items: center;
+            margin-top: auto; padding-top: 15px; border-top: 1px dashed #eee;
         }
+        .service-price { font-weight: 700; font-size: 1.25rem; color: var(--deep-pink); }
 
-        .service-price {
-            font-weight: 700;
-            font-size: 1.25rem;
-            color: var(--deep-pink);
-        }
-
-        .gallery-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-            gap: 15px;
-        }
-
-        .gallery-item {
-            position: relative;
-            height: 250px;
-            border-radius: var(--border-radius);
-            overflow: hidden;
-            cursor: pointer;
-        }
-
-        .gallery-item img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: var(--transition);
-        }
-
-        .gallery-item:hover img {
-            transform: scale(1.08);
-        }
-
+        .gallery-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 15px; }
+        .gallery-item { position: relative; height: 250px; border-radius: var(--border-radius); overflow: hidden; cursor: pointer; }
+        .gallery-item img { width: 100%; height: 100%; object-fit: cover; transition: var(--transition); }
+        .gallery-item:hover img { transform: scale(1.08); }
+        
         .gallery-overlay {
-            position: absolute;
-            top: 0; left: 0; right: 0; bottom: 0;
-            background: rgba(0, 0, 0, 0.4);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--light-color);
-            opacity: 0;
-            transition: var(--transition);
-            font-size: 1.5rem;
+            position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0, 0, 0, 0.4); display: flex; align-items: center; justify-content: center;
+            color: var(--light-color); opacity: 0; transition: var(--transition); font-size: 1.5rem;
         }
+        .gallery-item:hover .gallery-overlay { opacity: 1; }
 
-        .gallery-item:hover .gallery-overlay {
-            opacity: 1;
-        }
+        .about-content { display: grid; grid-template-columns: 1fr 1fr; gap: 50px; align-items: center; }
+        .about-img img { border-radius: 50%; box-shadow: var(--shadow); max-width: 280px; margin: 0 auto; border: 5px solid var(--accent-pink); }
+        .about-features { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 30px; }
+        .feature-item { display: flex; align-items: center; gap: 10px; }
+        .feature-item i { color: var(--deep-pink); }
 
-        .about-content {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 50px;
-            align-items: center;
-        }
+        .contact-section { background-color: var(--nude-bg); }
+        .contact-wrapper { display: grid; grid-template-columns: 1fr 1fr; gap: 50px; }
+        .contact-info-list { list-style: none; margin-top: 20px; }
+        .contact-info-list li { display: flex; align-items: flex-start; gap: 15px; margin-bottom: 20px; }
+        .contact-info-list i { font-size: 1.2rem; color: var(--deep-pink); margin-top: 5px; }
+        
+        .map-container { border-radius: var(--border-radius); overflow: hidden; box-shadow: var(--shadow); height: 100%; min-height: 300px; }
 
-        .about-img img {
-            border-radius: 50%;
-            box-shadow: var(--shadow);
-            max-width: 280px;
-            margin: 0 auto;
-            border: 5px solid var(--accent-pink);
-        }
-
-        .about-features {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 20px;
-            margin-top: 30px;
-        }
-
-        .feature-item {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .feature-item i {
-            color: var(--deep-pink);
-        }
-
-        .contact-section {
-            background-color: var(--nude-bg);
-        }
-
-        .contact-wrapper {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 50px;
-        }
-
-        .contact-info-list {
-            list-style: none;
-            margin-top: 20px;
-        }
-
-        .contact-info-list li {
-            display: flex;
-            align-items: flex-start;
-            gap: 15px;
-            margin-bottom: 20px;
-        }
-
-        .contact-info-list i {
-            font-size: 1.2rem;
-            color: var(--deep-pink);
-            margin-top: 5px;
-        }
-
-        .map-container {
-            border-radius: var(--border-radius);
-            overflow: hidden;
-            box-shadow: var(--shadow);
-            height: 100%;
-            min-height: 300px;
-        }
-
-        footer {
-            background-color: var(--dark-color);
-            color: var(--light-color);
-            padding: 60px 0 20px;
-            text-align: center;
-        }
-
-        .footer-logo {
-            font-family: var(--font-title);
-            font-size: 2rem;
-            margin-bottom: 10px;
-        }
-
-        .footer-tagline {
-            color: #aaa;
-            font-style: italic;
-            margin-bottom: 30px;
-        }
-
-        .social-links {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            margin-bottom: 40px;
-        }
-
+        footer { background-color: var(--dark-color); color: var(--light-color); padding: 60px 0 20px; text-align: center; }
+        .footer-logo { font-family: var(--font-title); font-size: 2rem; margin-bottom: 10px; }
+        .footer-tagline { color: #aaa; font-style: italic; margin-bottom: 30px; }
+        .social-links { display: flex; justify-content: center; gap: 20px; margin-bottom: 40px; }
+        
         .social-btn {
-            width: 45px;
-            height: 45px;
-            border-radius: 50%;
-            background-color: rgba(255, 255, 255, 0.1);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--light-color);
-            font-size: 1.2rem;
-            transition: var(--transition);
+            width: 45px; height: 45px; border-radius: 50%; background-color: rgba(255, 255, 255, 0.1);
+            display: flex; align-items: center; justify-content: center; color: var(--light-color);
+            font-size: 1.2rem; transition: var(--transition);
         }
-
-        .social-btn:hover {
-            background-color: var(--deep-pink);
-            transform: translateY(-3px);
-        }
-
-        .copyright {
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            padding-top: 20px;
-            font-size: 0.85rem;
-            color: #888;
-        }
+        .social-btn:hover { background-color: var(--deep-pink); transform: translateY(-3px); }
+        .copyright { border-top: 1px solid rgba(255, 255, 255, 0.1); padding-top: 20px; font-size: 0.85rem; color: #888; }
 
         .whatsapp-float {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            background-color: #25d366;
-            color: white;
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 30px;
-            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
-            z-index: 999;
-            transition: var(--transition);
+            position: fixed; bottom: 30px; right: 30px; background-color: #25d366; color: white;
+            width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center;
+            font-size: 30px; box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2); z-index: 999; transition: var(--transition);
         }
-
-        .whatsapp-float:hover {
-            transform: scale(1.1);
-        }
+        .whatsapp-float:hover { transform: scale(1.1); }
 
         .modal {
-            display: none;
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0, 0, 0, 0.6);
-            backdrop-filter: blur(4px);
-            z-index: 2000;
-            align-items: center;
-            justify-content: center;
+            display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.6); backdrop-filter: blur(4px); z-index: 2000;
+            align-items: center; justify-content: center;
         }
 
         .modal-content {
-            background: white;
-            padding: 40px;
-            border-radius: var(--border-radius);
-            max-width: 500px;
-            width: 90%;
-            position: relative;
-            max-height: 90vh;
-            overflow-y: auto;
+            background: white; padding: 40px; border-radius: var(--border-radius);
+            max-width: 500px; width: 90%; position: relative; max-height: 90vh; overflow-y: auto;
         }
 
-        .close-modal {
-            position: absolute;
-            top: 15px; right: 20px;
-            font-size: 1.5rem;
-            cursor: pointer;
-            color: var(--gray-text);
-        }
+        .close-modal { position: absolute; top: 15px; right: 20px; font-size: 1.5rem; cursor: pointer; color: var(--gray-text); }
 
-        .form-group {
-            margin-bottom: 20px;
-        }
-
-        .form-group label {
-            display: block;
-            margin-bottom: 8px;
-            font-size: 0.9rem;
-            font-weight: 500;
-        }
-
+        .form-group { margin-bottom: 20px; }
+        .form-group label { display: block; margin-bottom: 8px; font-size: 0.9rem; font-weight: 500; }
         .form-group input, .form-group select, .form-group textarea {
-            width: 100%;
-            padding: 12px;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            font-family: inherit;
-            font-size: 0.9rem;
+            width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 8px; font-family: inherit; font-size: 0.9rem;
         }
 
-        .time-slots-container {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 10px;
-            margin-top: 10px;
+        .price-breakdown {
+            background-color: var(--nude-bg); border: 1px solid var(--accent-pink);
+            padding: 15px; border-radius: 8px; margin-bottom: 20px; font-size: 0.9rem;
         }
+        .price-row { display: flex; justify-content: space-between; margin-bottom: 5px; }
+        .price-row.highlight { color: var(--deep-pink); font-weight: bold; border-top: 1px dashed #ddd; padding-top: 5px; margin-top: 5px; }
 
+        .time-slots-container { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-top: 10px; }
         .time-slot-btn {
-            padding: 10px;
-            border: 1px solid var(--accent-pink);
-            background-color: var(--nude-bg);
-            border-radius: 8px;
-            cursor: pointer;
-            text-align: center;
-            font-weight: 600;
-            font-size: 0.9rem;
-            transition: var(--transition);
+            padding: 10px; border: 1px solid var(--accent-pink); background-color: var(--nude-bg);
+            border-radius: 8px; cursor: pointer; text-align: center; font-weight: 600; font-size: 0.9rem; transition: var(--transition);
         }
-
-        .time-slot-btn:hover {
-            background-color: var(--accent-pink);
-            color: white;
-        }
-
-        .time-slot-btn.selected {
-            background-color: var(--deep-pink);
-            color: white;
-            border-color: var(--deep-pink);
-        }
-
-        .time-slot-btn.disabled {
-            background-color: #e0e0e0;
-            color: #a0a0a0;
-            border-color: #ccc;
-            cursor: not-allowed;
-            text-decoration: line-through;
-        }
+        .time-slot-btn:hover { background-color: var(--accent-pink); color: white; }
+        .time-slot-btn.selected { background-color: var(--deep-pink); color: white; border-color: var(--deep-pink); }
+        .time-slot-btn.disabled { background-color: #e0e0e0; color: #a0a0a0; border-color: #ccc; cursor: not-allowed; text-decoration: line-through; }
 
         .lightbox {
-            display: none;
-            position: fixed;
-            top:0; left:0; width:100%; height:100%;
-            background: rgba(0,0,0,0.85);
-            z-index: 3000;
-            justify-content: center;
-            align-items: center;
+            display: none; position: fixed; top:0; left:0; width:100%; height:100%;
+            background: rgba(0,0,0,0.85); z-index: 3000; justify-content: center; align-items: center;
         }
-
-        .lightbox img {
-            max-width: 85%;
-            max-height: 85%;
-            border-radius: var(--border-radius);
-        }
+        .lightbox img { max-width: 85%; max-height: 85%; border-radius: var(--border-radius); }
 
         @media (max-width: 768px) {
             .nav-links {
-                position: fixed;
-                top: 80px;
-                right: -100%;
-                width: 100%;
-                height: calc(100vh - 80px);
-                background-color: white;
-                flex-direction: column;
-                align-items: center;
-                padding-top: 50px;
-                transition: var(--transition);
+                position: fixed; top: 80px; right: -100%; width: 100%; height: calc(100vh - 80px);
+                background-color: white; flex-direction: column; align-items: center; padding-top: 50px; transition: var(--transition);
             }
-
-            .nav-links.active {
-                right: 0;
-            }
-
-            .hamburger {
-                display: block;
-            }
-
-            .hero h1 {
-                font-size: 2.5rem;
-            }
-
-            .hero-btns {
-                flex-direction: column;
-            }
-
-            .about-content, .contact-wrapper {
-                grid-template-columns: 1fr;
-            }
-
-            .time-slots-container {
-                grid-template-columns: repeat(2, 1fr);
-            }
+            .nav-links.active { right: 0; }
+            .hamburger { display: block; }
+            .hero h1 { font-size: 2.5rem; }
+            .hero-btns { flex-direction: column; }
+            .about-content, .contact-wrapper { grid-template-columns: 1fr; }
+            .time-slots-container { grid-template-columns: repeat(2, 1fr); }
         }
     </style>
 </head>
@@ -634,9 +258,7 @@
                 <li><a href="#nosotros">Nosotros</a></li>
                 <li><a href="#contacto">Contacto</a></li>
             </ul>
-            <div class="hamburger" id="hamburger">
-                <i class="fas fa-bars"></i>
-            </div>
+            <div class="hamburger" id="hamburger"><i class="fas fa-bars"></i></div>
         </div>
     </header>
 
@@ -932,7 +554,7 @@
 
             <div class="notice-box">
                 <i class="fas fa-info-circle"></i>
-                En los retoques de pestañas, la página indica que hay que conservar aproximadamente el 50% de las pestañas para que cuente como mantenimiento; de lo contrario, se cobra como un servicio nuevo.
+                En los retoques de pestañas, se debe conservar al menos el 50% de las extensiones para aplicar tarifa de mantenimiento; de lo contrario, se cobrará servicio nuevo.
             </div>
 
         </div>
@@ -980,22 +602,10 @@
                     <p>En <strong>Beautiful Lashes & Nails UY (Estética Cindy Silveira)</strong> nos enfocamos en brindarte un trato exclusivo para realzar tu belleza natural. Nuestro compromiso es cuidar la salud de tus pestañas y uñas con técnicas innovadoras y materiales de excelente calidad.</p>
                     
                     <div class="about-features">
-                        <div class="feature-item">
-                            <i class="fas fa-check-circle"></i>
-                            <span>Atención Personalizada</span>
-                        </div>
-                        <div class="feature-item">
-                            <i class="fas fa-check-circle"></i>
-                            <span>Máxima Higiene</span>
-                        </div>
-                        <div class="feature-item">
-                            <i class="fas fa-check-circle"></i>
-                            <span>Insumos Premium</span>
-                        </div>
-                        <div class="feature-item">
-                            <i class="fas fa-check-circle"></i>
-                            <span>Ambiente Cálido</span>
-                        </div>
+                        <div class="feature-item"><i class="fas fa-check-circle"></i><span>Atención Personalizada</span></div>
+                        <div class="feature-item"><i class="fas fa-check-circle"></i><span>Máxima Higiene</span></div>
+                        <div class="feature-item"><i class="fas fa-check-circle"></i><span>Insumos Premium</span></div>
+                        <div class="feature-item"><i class="fas fa-check-circle"></i><span>Ambiente Cálido</span></div>
                     </div>
                 </div>
             </div>
@@ -1071,17 +681,21 @@
         <i class="fab fa-whatsapp"></i>
     </a>
 
-    <!-- Modal de Reserva -->
+    <!-- Modal de Reserva con Seña del 50% -->
     <div class="modal" id="bookingModal">
         <div class="modal-content">
             <span class="close-modal" onclick="closeBookingModal()">×</span>
-            <h2 style="font-size: 2rem; margin-bottom: 10px;">Reservar Turno</h2>
-            <p style="font-size: 0.85rem; color: var(--gray-text); margin-bottom: 20px;">Selecciona tu servicio, fecha y horario disponible.</p>
+            <h2 style="font-size: 2rem; margin-bottom: 5px;">Reservar Turno</h2>
+            
+            <div class="notice-box" style="margin: 10px 0 15px 0; padding: 10px 12px; font-size: 0.8rem;">
+                💗 Para reservar tu turno se requiere una seña del 50% del valor del servicio. El saldo restante se abona el día de la cita.<br>
+                <strong>⚠ La reserva queda confirmada una vez realizada la seña.</strong>
+            </div>
             
             <form id="bookingForm" onsubmit="handleBooking(event)">
                 <div class="form-group">
                     <label>Servicio Seleccionado</label>
-                    <select id="serviceSelect" required>
+                    <select id="serviceSelect" onchange="updatePriceBreakdown()" required>
                         <option value="">-- Selecciona una opción --</option>
                         
                         <optgroup label="💅 Servicios">
@@ -1119,6 +733,13 @@
                         </optgroup>
                     </select>
                 </div>
+
+                <div class="price-breakdown" id="priceBreakdown" style="display: none;">
+                    <div class="price-row"><span>Precio del servicio:</span> <strong id="lblPrice">$0</strong></div>
+                    <div class="price-row highlight"><span>Seña requerida (50%):</span> <strong id="lblDeposit">$0</strong></div>
+                    <div class="price-row"><span>Saldo a pagar el día del turno:</span> <strong id="lblBalance">$0</strong></div>
+                </div>
+
                 <div class="form-group">
                     <label>Nombre y Apellido</label>
                     <input type="text" id="clientName" placeholder="Tu nombre completo" required>
@@ -1145,7 +766,8 @@
                     <label>Observaciones (Opcional)</label>
                     <textarea id="bookingNotes" rows="2" placeholder="Aclaraciones adicionales"></textarea>
                 </div>
-                <button type="submit" class="btn btn-primary" style="width: 100%;">Enviar Reserva a WhatsApp</button>
+
+                <button type="submit" id="btnSubmit" class="btn btn-primary" style="width: 100%;">CONTINUAR A RESERVAR</button>
             </form>
         </div>
     </div>
@@ -1157,51 +779,50 @@
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
     <script src="https://npmcdn.com/flatpickr/dist/l10n/es.js"></script>
 
-    <!-- SDKs de Firebase Realtime Database -->
-    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
-
     <script>
-        // CONFIGURACIÓN DE TU PROYECTO DE FIREBASE
-        const firebaseConfig = {
-            apiKey: "REEMPLAZAR_CON_TU_API_KEY",
-            authDomain: "REEMPLAZAR_CON_TU_PROJECT.firebaseapp.com",
-            databaseURL: "https://REEMPLAZAR_CON_TU_PROJECT-default-rtdb.firebaseio.com",
-            projectId: "REEMPLAZAR_CON_TU_PROJECT",
-            storageBucket: "REEMPLAZAR_CON_TU_PROJECT.appspot.com",
-            messagingSenderId: "1234567890",
-            appId: "1:1234567890:web:abc123def456"
-        };
-
-        // Inicializar Firebase
-        firebase.initializeApp(firebaseConfig);
-        const db = firebase.database();
-
         const weekdayHours = ["09:00", "11:00", "13:00", "15:00", "17:00"];
         const saturdayHours = ["08:00", "10:00", "12:00", "14:00", "16:00"];
 
-        let flatpickrInstance = null;
-
         document.addEventListener("DOMContentLoaded", function() {
-            flatpickrInstance = flatpickr("#bookingDate", {
+            flatpickr("#bookingDate", {
                 locale: "es",
                 minDate: "today",
                 dateFormat: "Y-m-d",
-                disable: [
-                    function(date) {
-                        return (date.getDay() === 0); // Deshabilitar domingos
-                    }
-                ],
+                disable: [function(date) { return (date.getDay() === 0); }], // Deshabilitar domingos
                 onChange: function(selectedDates, dateStr) {
-                    renderTimeSlots(selectedDates[0], dateStr);
+                    if (selectedDates.length > 0) {
+                        renderTimeSlots(selectedDates[0]);
+                    }
                 }
             });
         });
 
-        // Obtener turnos ocupados desde Firebase en tiempo real
-        function renderTimeSlots(selectedDate, dateStr) {
+        function updatePriceBreakdown() {
+            const serviceSelect = id('serviceSelect').value;
+            const breakdownBox = id('priceBreakdown');
+
+            if (!serviceSelect) {
+                breakdownBox.style.display = 'none';
+                return;
+            }
+
+            const priceMatch = serviceSelect.match(/\$\s*([\d\.]+)/);
+            if (priceMatch) {
+                const numericPrice = parseFloat(priceMatch[1].replace('.', ''));
+                const deposit = numericPrice * 0.5;
+                const balance = numericPrice * 0.5;
+
+                id('lblPrice').textContent = `$${numericPrice.toLocaleString('es-UY')}`;
+                id('lblDeposit').textContent = `$${deposit.toLocaleString('es-UY')}`;
+                id('lblBalance').textContent = `$${balance.toLocaleString('es-UY')}`;
+                
+                breakdownBox.style.display = 'block';
+            }
+        }
+
+        function renderTimeSlots(selectedDate) {
             const container = id('timeSlotsContainer');
-            container.innerHTML = '<p style="font-size:0.85rem; color:#888; grid-column: span 3;">Cargando horarios...</p>';
+            container.innerHTML = '';
             id('selectedTime').value = '';
 
             if (!selectedDate) return;
@@ -1209,50 +830,25 @@
             const dayOfWeek = selectedDate.getDay();
             const availableHours = (dayOfWeek === 6) ? saturdayHours : weekdayHours;
 
-            // Consultar turnos guardados en Firebase para la fecha seleccionada
-            db.ref('turnos').orderByChild('fecha').equalTo(dateStr).once('value', (snapshot) => {
-                const takenHours = [];
-                snapshot.forEach((childSnapshot) => {
-                    const booking = childSnapshot.val();
-                    if (booking.hora) {
-                        takenHours.push(booking.hora);
-                    }
-                });
+            availableHours.forEach(hour => {
+                const button = document.createElement('button');
+                button.type = 'button';
+                button.className = 'time-slot-btn';
+                button.textContent = hour;
 
-                container.innerHTML = '';
-                availableHours.forEach(hour => {
-                    const button = document.createElement('button');
-                    button.type = 'button';
-                    button.className = 'time-slot-btn';
-                    button.textContent = hour;
+                button.onclick = function() {
+                    document.querySelectorAll('.time-slot-btn').forEach(btn => btn.classList.remove('selected'));
+                    button.classList.add('selected');
+                    id('selectedTime').value = hour;
+                };
 
-                    if (takenHours.includes(hour)) {
-                        button.classList.add('disabled');
-                        button.disabled = true;
-                    } else {
-                        button.onclick = function() {
-                            document.querySelectorAll('.time-slot-btn').forEach(btn => btn.classList.remove('selected'));
-                            button.classList.add('selected');
-                            id('selectedTime').value = hour;
-                        };
-                    }
-                    container.appendChild(button);
-                });
+                container.appendChild(button);
             });
         }
 
         const hamburger = id('hamburger');
         const navLinks = id('navLinks');
-
-        hamburger.addEventListener('click', () => {
-            navLinks.classList.toggle('active');
-        });
-
-        document.querySelectorAll('.nav-links a').forEach(link => {
-            link.addEventListener('click', () => {
-                navLinks.classList.remove('active');
-            });
-        });
+        hamburger.addEventListener('click', () => navLinks.classList.toggle('active'));
 
         function openBookingModal(serviceName = '') {
             const modal = id('bookingModal');
@@ -1264,20 +860,13 @@
                         break;
                     }
                 }
+                updatePriceBreakdown();
             }
             modal.style.display = 'flex';
         }
 
-        function closeBookingModal() {
-            id('bookingModal').style.display = 'none';
-        }
+        function closeBookingModal() { id('bookingModal').style.display = 'none'; }
 
-        // Generar Token de Cancelación Único
-        function generateCancelToken() {
-            return 'CANCEL-' + Math.random().toString(36).substring(2, 9).toUpperCase();
-        }
-
-        // Procesar Agendamiento y guardar en Firebase
         function handleBooking(e) {
             e.preventDefault();
             
@@ -1286,70 +875,29 @@
             const phone = id('clientPhone').value;
             const date = id('bookingDate').value;
             const time = id('selectedTime').value;
-            const notes = id('bookingNotes').value;
 
             if (!time) {
                 alert("Por favor selecciona un horario disponible.");
                 return;
             }
 
-            const cancelToken = generateCancelToken();
-            const newBookingRef = db.ref('turnos').push();
-            const bookingId = newBookingRef.key;
+            const message = `Hola Cin! Quisiera agendar un turno:%0A` +
+                            `• *Cliente:* ${encodeURIComponent(name)}%0A` +
+                            `• *Teléfono:* ${encodeURIComponent(phone)}%0A` +
+                            `• *Servicio:* ${encodeURIComponent(service)}%0A` +
+                            `• *Fecha:* ${encodeURIComponent(date)}%0A` +
+                            `• *Hora:* ${encodeURIComponent(time)}`;
 
-            // Guardar turno en Firebase
-            newBookingRef.set({
-                id: bookingId,
-                cliente: name,
-                telefono: phone,
-                servicio: service,
-                fecha: date,
-                hora: time,
-                observaciones: notes || 'Sin observaciones',
-                cancelToken: cancelToken,
-                estado: 'confirmado'
-            }).then(() => {
-                // Obtener dominio actual dinámicamente para construir el enlace
-                const domain = window.location.origin + window.location.pathname.replace('index.html', '');
-                const cancelLink = `${domain}cancelar.html?id=${bookingId}&token=${cancelToken}`;
-
-                const message = `¡Hola Cin! Quisiera agendar un turno en Estética Cindy Silveira:%0A%0A` +
-                                `*Servicio:* ${service}%0A` +
-                                `*Cliente:* ${name}%0A` +
-                                `*Teléfono:* ${phone}%0A` +
-                                `*Fecha:* ${date}%0A` +
-                                `*Hora:* ${time}%0A` +
-                                `*Observaciones:* ${notes || 'Sin observaciones'}%0A%0A` +
-                                `🔗 *Enlace para cancelar tu turno si no puedes asistir:*%0A${cancelLink}`;
-
-                window.open(`https://wa.me/59896247696?text=${message}`, '_blank');
-                
-                closeBookingModal();
-                id('bookingForm').reset();
-                id('timeSlotsContainer').innerHTML = '<p style="font-size:0.85rem; color:#888; grid-column: span 3;">Primero elige una fecha para ver las horas disponibles.</p>';
-            }).catch((error) => {
-                alert("Hubo un error al guardar tu turno: " + error.message);
-            });
+            window.open(`https://wa.me/59896247696?text=${message}`, '_blank');
+            closeBookingModal();
         }
 
-        function openLightbox(src) {
-            id('lightboxImg').src = src;
-            id('lightbox').style.display = 'flex';
-        }
-
-        function closeLightbox() {
-            id('lightbox').style.display = 'none';
-        }
-
-        function id(elementId) {
-            return document.getElementById(elementId);
-        }
+        function openLightbox(src) { id('lightboxImg').src = src; id('lightbox').style.display = 'flex'; }
+        function closeLightbox() { id('lightbox').style.display = 'none'; }
+        function id(elementId) { return document.getElementById(elementId); }
 
         window.onclick = function(event) {
-            const modal = id('bookingModal');
-            if (event.target === modal) {
-                closeBookingModal();
-            }
+            if (event.target === id('bookingModal')) closeBookingModal();
         };
     </script>
 </body>
