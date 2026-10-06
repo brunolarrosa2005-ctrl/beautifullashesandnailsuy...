@@ -74,6 +74,8 @@
         .btn-primary:hover { background-color: var(--deep-pink); transform: translateY(-2px); box-shadow: 0 5px 15px rgba(212, 136, 143, 0.4); }
         .btn-secondary { background-color: transparent; color: var(--dark-color); border: 1px solid var(--dark-color); }
         .btn-secondary:hover { background-color: var(--soft-pink); border-color: var(--accent-pink); }
+        .btn-whatsapp { background-color: #25d366; color: white; display: flex; align-items: center; justify-content: center; gap: 8px; width: 100%; text-decoration: none; }
+        .btn-whatsapp:hover { background-color: #20ba5a; }
 
         header {
             position: fixed; top: 0; left: 0; width: 100%;
@@ -226,6 +228,28 @@
         .time-slot-btn.selected { background-color: var(--deep-pink); color: white; border-color: var(--deep-pink); }
         .time-slot-btn.disabled { background-color: #e0e0e0; color: #a0a0a0; border-color: #ccc; cursor: not-allowed; text-decoration: line-through; }
 
+        /* Estilos para Sección de Pago con Tarjeta */
+        .card-payment-box {
+            background: #fafafa;
+            border: 1px solid var(--accent-pink);
+            border-radius: 8px;
+            padding: 15px;
+            margin-top: 20px;
+        }
+
+        .card-row {
+            display: flex;
+            gap: 10px;
+        }
+
+        .card-icons {
+            display: flex;
+            gap: 10px;
+            font-size: 1.5rem;
+            color: var(--deep-pink);
+            margin-bottom: 10px;
+        }
+
         .lightbox {
             display: none; position: fixed; top:0; left:0; width:100%; height:100%;
             background: rgba(0,0,0,0.85); z-index: 3000; justify-content: center; align-items: center;
@@ -243,6 +267,7 @@
             .hero-btns { flex-direction: column; }
             .about-content, .contact-wrapper { grid-template-columns: 1fr; }
             .time-slots-container { grid-template-columns: repeat(2, 1fr); }
+            .card-row { flex-direction: column; gap: 0; }
         }
     </style>
 </head>
@@ -622,7 +647,7 @@
             <div class="contact-wrapper">
                 <div>
                     <h3>Detalles de Atención</h3>
-                    <p>Agéndate directamente desde nuestro formulario pagando la seña online para coordinar tu cita.</p>
+                    <p>Agéndate directamente desde nuestro formulario seleccionando tu turno y abonando la seña con tarjeta de débito o crédito directamente en el sitio.</p>
                     
                     <ul class="contact-info-list">
                         <li>
@@ -681,15 +706,14 @@
         <i class="fab fa-whatsapp"></i>
     </a>
 
-    <!-- Modal de Reserva con Seña del 50% Integrada -->
+    <!-- Modal de Reserva con Formulario de Pago con Tarjeta -->
     <div class="modal" id="bookingModal">
         <div class="modal-content">
             <span class="close-modal" onclick="closeBookingModal()">×</span>
             <h2 style="font-size: 2rem; margin-bottom: 5px;">Reservar Turno</h2>
             
             <div class="notice-box" style="margin: 10px 0 15px 0; padding: 10px 12px; font-size: 0.8rem;">
-                💗 Para reservar tu turno se requiere una seña del 50% del valor del servicio a abonarse en el siguiente paso vía Mercado Pago. El saldo restante se abona el día de la cita.<br>
-                <strong>⚠ La reserva queda confirmada automáticamente una vez procesado el pago.</strong>
+                💳 <strong>Pago Seguro en la Web:</strong> Se abonará el 50% de seña para asegurar tu turno de forma automática. El saldo restante se cancela en el local.
             </div>
             
             <form id="bookingForm" onsubmit="handleBooking(event)">
@@ -699,44 +723,44 @@
                         <option value="">-- Selecciona una opción --</option>
                         
                         <optgroup label="💅 Servicios">
-                            <option value="Semipermanente - $700">Semipermanente - $700</option>
-                            <option value="Kapping - $800">Kapping - $800</option>
-                            <option value="Soft Gel - $1.000">Soft Gel - $1.000</option>
-                            <option value="Semi pies - $700">Semi pies - $700</option>
-                            <option value="Laminado de cejas - $700">Laminado de cejas - $700</option>
-                            <option value="Perfilado + bozo - $250">Perfilado + bozo - $250</option>
-                            <option value="Perfilado con henna - $500">Perfilado con henna - $500</option>
-                            <option value="Lifting de pestañas - $950">Lifting de pestañas - $950</option>
-                            <option value="Pestañas Volumen 2D - $950">Pestañas Volumen 2D - $950</option>
-                            <option value="Pestañas Volumen 3D - $1.150">Pestañas Volumen 3D - $1.150</option>
-                            <option value="Pestañas Volumen 4D - $1.350">Pestañas Volumen 4D - $1.350</option>
-                            <option value="Pestañas Brasileras - $1.200">Pestañas Brasileras - $1.200</option>
-                            <option value="Retiro de acrílicas de otro lugar - $250">Retiro de acrílicas de otro lugar - $250</option>
-                            <option value="Removedor de pestañas - $250">Removedor de pestañas - $250</option>
-                            <option value="Arreglo de uña - $100 c/u">Arreglo de uña - $100 c/u</option>
+                            <option value="Semipermanente - $700" data-price="700">Semipermanente - $700</option>
+                            <option value="Kapping - $800" data-price="800">Kapping - $800</option>
+                            <option value="Soft Gel - $1.000" data-price="1000">Soft Gel - $1.000</option>
+                            <option value="Semi pies - $700" data-price="700">Semi pies - $700</option>
+                            <option value="Laminado de cejas - $700" data-price="700">Laminado de cejas - $700</option>
+                            <option value="Perfilado + bozo - $250" data-price="250">Perfilado + bozo - $250</option>
+                            <option value="Perfilado con henna - $500" data-price="500">Perfilado con henna - $500</option>
+                            <option value="Lifting de pestañas - $950" data-price="950">Lifting de pestañas - $950</option>
+                            <option value="Pestañas Volumen 2D - $950" data-price="950">Pestañas Volumen 2D - $950</option>
+                            <option value="Pestañas Volumen 3D - $1.150" data-price="1150">Pestañas Volumen 3D - $1.150</option>
+                            <option value="Pestañas Volumen 4D - $1.350" data-price="1350">Pestañas Volumen 4D - $1.350</option>
+                            <option value="Pestañas Brasileras - $1.200" data-price="1200">Pestañas Brasileras - $1.200</option>
+                            <option value="Retiro de acrílicas de otro lugar - $250" data-price="250">Retiro de acrílicas de otro lugar - $250</option>
+                            <option value="Removedor de pestañas - $250" data-price="250">Removedor de pestañas - $250</option>
+                            <option value="Arreglo de uña - $100 c/u" data-price="100">Arreglo de uña - $100 c/u</option>
                         </optgroup>
 
                         <optgroup label="💗 Promociones">
-                            <option value="Lifting de pestañas + Semipermanente - $1.450">Lifting de pestañas + Semipermanente - $1.450</option>
-                            <option value="Extensiones Vol. 3D + Perfilado de cejas - $1.300">Extensiones Vol. 3D + Perfilado de cejas - $1.300</option>
-                            <option value="Lifting de pestañas + Kapping - $1.600">Lifting de pestañas + Kapping - $1.600</option>
-                            <option value="Laminado + Lifting - $1.500">Laminado + Lifting - $1.500</option>
-                            <option value="Semi manos y pies - $1.200">Semi manos y pies - $1.200</option>
+                            <option value="Lifting de pestañas + Semipermanente - $1.450" data-price="1450">Lifting de pestañas + Semipermanente - $1.450</option>
+                            <option value="Extensiones Vol. 3D + Perfilado de cejas - $1.300" data-price="1300">Extensiones Vol. 3D + Perfilado de cejas - $1.300</option>
+                            <option value="Lifting de pestañas + Kapping - $1.600" data-price="1600">Lifting de pestañas + Kapping - $1.600</option>
+                            <option value="Laminado + Lifting - $1.500" data-price="1500">Laminado + Lifting - $1.500</option>
+                            <option value="Semi manos y pies - $1.200" data-price="1200">Semi manos y pies - $1.200</option>
                         </optgroup>
 
                         <optgroup label="🦋 Mantenimientos / retoques">
-                            <option value="Retoque / Extensiones 3D - $950">Retoque / Extensiones 3D - $950</option>
-                            <option value="Retoque / Extensiones 2D - $800">Retoque / Extensiones 2D - $800</option>
-                            <option value="Retoque / Extensiones 4D - $1.150">Retoque / Extensiones 4D - $1.150</option>
-                            <option value="Retoque / Brasilera - $1.000">Retoque / Brasilera - $1.000</option>
-                            <option value="Servicio / Soft Gel - $800">Servicio / Soft Gel - $800</option>
+                            <option value="Retoque / Extensiones 3D - $950" data-price="950">Retoque / Extensiones 3D - $950</option>
+                            <option value="Retoque / Extensiones 2D - $800" data-price="800">Retoque / Extensiones 2D - $800</option>
+                            <option value="Retoque / Extensiones 4D - $1.150" data-price="1150">Retoque / Extensiones 4D - $1.150</option>
+                            <option value="Retoque / Brasilera - $1.000" data-price="1000">Retoque / Brasilera - $1.000</option>
+                            <option value="Servicio / Soft Gel - $800" data-price="800">Servicio / Soft Gel - $800</option>
                         </optgroup>
                     </select>
                 </div>
 
                 <div class="price-breakdown" id="priceBreakdown" style="display: none;">
                     <div class="price-row"><span>Precio del servicio:</span> <strong id="lblPrice">$0</strong></div>
-                    <div class="price-row highlight"><span>Seña requerida (50%):</span> <strong id="lblDeposit">$0</strong></div>
+                    <div class="price-row highlight"><span>Seña a pagar ahora (50%):</span> <strong id="lblDeposit">$0</strong></div>
                     <div class="price-row"><span>Saldo a pagar el día del turno:</span> <strong id="lblBalance">$0</strong></div>
                 </div>
 
@@ -762,13 +786,70 @@
                     <input type="hidden" id="selectedTime" required>
                 </div>
 
-                <div class="form-group">
+                <!-- Sección para añadir Tarjeta -->
+                <div class="card-payment-box">
+                    <label style="font-weight: bold; margin-bottom: 10px; display: block; color: var(--dark-color);">
+                        <i class="far fa-credit-card"></i> Datos de la Tarjeta (Débito / Crédito)
+                    </label>
+                    
+                    <div class="card-icons">
+                        <i class="fab fa-cc-visa"></i>
+                        <i class="fab fa-cc-mastercard"></i>
+                        <i class="fab fa-cc-amex"></i>
+                        <i class="fas fa-credit-card"></i>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Titular de la tarjeta</label>
+                        <input type="text" id="cardHolder" placeholder="Como figura en la tarjeta" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Número de tarjeta</label>
+                        <input type="text" id="cardNumber" maxlength="19" placeholder="0000 0000 0000 0000" required>
+                    </div>
+
+                    <div class="card-row">
+                        <div class="form-group" style="flex: 1;">
+                            <label>Vencimiento</label>
+                            <input type="text" id="cardExp" placeholder="MM/AA" maxlength="5" required>
+                        </div>
+                        <div class="form-group" style="flex: 1;">
+                            <label>CVC / CVV</label>
+                            <input type="password" id="cardCvc" placeholder="123" maxlength="4" required>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group" style="margin-top: 15px;">
                     <label>Observaciones (Opcional)</label>
                     <textarea id="bookingNotes" rows="2" placeholder="Aclaraciones adicionales"></textarea>
                 </div>
 
-                <button type="submit" id="btnSubmit" class="btn btn-primary" style="width: 100%;">PAGAR SEÑA DEL 50% ONLINE</button>
+                <button type="submit" id="btnPay" class="btn btn-primary" style="width: 100%;">PAGAR SEÑA Y CONFIRMAR TURNO</button>
             </form>
+        </div>
+    </div>
+
+    <!-- Modal de Confirmación de Pago Exitoso -->
+    <div class="modal" id="prexModal">
+        <div class="modal-content" style="text-align: center;">
+            <span class="close-modal" onclick="closePrexModal()">×</span>
+            <i class="fas fa-check-circle" style="font-size: 3.5rem; color: #25d366; margin-bottom: 15px;"></i>
+            <h2 style="font-size: 1.8rem; margin-bottom: 15px; color: var(--dark-color);">¡Pago Procesado con Éxito!</h2>
+            
+            <p style="margin-bottom: 15px; font-size: 0.95rem;">Tu pago de la seña ha sido acreditado en la cuenta vinculada <strong>Prex (195548)</strong> y tu turno se ha agendado exitosamente.</p>
+            
+            <div style="background: var(--nude-bg); border: 2px dashed var(--deep-pink); padding: 20px; border-radius: 10px; margin-bottom: 20px;">
+                <p style="font-size: 1rem; margin-bottom: 5px;">Monto Pagado: <strong id="prexDepositAmount" style="color: var(--deep-pink);">$0</strong></p>
+                <p style="font-size: 0.85rem; color: var(--gray-text);">ID de Transacción: <span id="txnId" style="font-weight: bold; font-family: monospace;"></span></p>
+            </div>
+
+            <p style="font-size: 0.85rem; color: var(--gray-text); margin-bottom: 20px;">Haz clic en el siguiente botón para enviar los detalles de la reserva directamente a Cin por WhatsApp.</p>
+
+            <a id="whatsappPrexBtn" href="#" target="_blank" class="btn btn-whatsapp">
+                <i class="fab fa-whatsapp" style="font-size: 1.2rem;"></i> Notificar Reserva por WhatsApp
+            </a>
         </div>
     </div>
 
@@ -784,7 +865,6 @@
     <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
 
     <script>
-        // CONFIGURACIÓN DE TU PROYECTO DE FIREBASE
         const firebaseConfig = {
             apiKey: "REEMPLAZAR_CON_TU_API_KEY",
             authDomain: "REEMPLAZAR_CON_TU_PROJECT.firebaseapp.com",
@@ -796,9 +876,6 @@
             firebase.initializeApp(firebaseConfig);
         }
         const db = firebase.database();
-
-        // URL de tu backend en producción que interactúa con Mercado Pago
-        const API_BACKEND_URL = "https://tu-api.com/api";
 
         const weekdayHours = ["09:00", "11:00", "13:00", "15:00", "17:00"];
         const saturdayHours = ["08:00", "10:00", "12:00", "14:00", "16:00"];
@@ -818,34 +895,35 @@
                 }
             });
 
-            checkPaymentStatusInUrl();
+            // Formateadores sencillos de tarjeta
+            id('cardNumber').addEventListener('input', function(e) {
+                let v = e.target.value.replace(/\D/g, '').substring(0,16);
+                e.target.value = v.replace(/(.{4})/g, '$1 ').trim();
+            });
+
+            id('cardExp').addEventListener('input', function(e) {
+                let v = e.target.value.replace(/\D/g, '').substring(0,4);
+                if (v.length >= 2) {
+                    e.target.value = v.substring(0,2) + '/' + v.substring(2);
+                } else {
+                    e.target.value = v;
+                }
+            });
         });
 
-        function checkPaymentStatusInUrl() {
-            const urlParams = new URLSearchParams(window.location.search);
-            const status = urlParams.get('pago');
-
-            if (status === 'exitoso') {
-                alert("¡Tu pago ha sido procesado con éxito! Tu reserva quedó confirmada.");
-                window.history.replaceState({}, document.title, window.location.pathname);
-            } else if (status === 'fallido') {
-                alert("Ocurrió un inconveniente con el pago. Por favor intenta nuevamente.");
-                window.history.replaceState({}, document.title, window.location.pathname);
-            }
-        }
-
         function updatePriceBreakdown() {
-            const serviceSelect = id('serviceSelect').value;
+            const select = id('serviceSelect');
+            const selectedOption = select.options[select.selectedIndex];
             const breakdownBox = id('priceBreakdown');
 
-            if (!serviceSelect) {
+            if (!select.value) {
                 breakdownBox.style.display = 'none';
                 return;
             }
 
-            const priceMatch = serviceSelect.match(/\$\s*([\d\.]+)/);
-            if (priceMatch) {
-                const numericPrice = parseFloat(priceMatch[1].replace('.', ''));
+            const priceAttr = selectedOption.getAttribute('data-price');
+            if (priceAttr) {
+                const numericPrice = parseFloat(priceAttr);
                 const deposit = numericPrice * 0.5;
                 const balance = numericPrice * 0.5;
 
@@ -884,23 +962,14 @@
                         clearTimeout(timeoutId);
 
                         const takenHours = [];
-                        const now = Date.now();
-                        const HOLD_TIME_MS = 15 * 60 * 1000;
-
                         if (snapshot.exists()) {
                             snapshot.forEach((childSnapshot) => {
                                 const booking = childSnapshot.val();
-                                if (booking.estado === 'confirmado') {
+                                if (booking.estado === 'confirmado' || booking.estado === 'pendiente_pago') {
                                     takenHours.push(booking.hora);
-                                } else if (booking.estado === 'pendiente_pago') {
-                                    const createdAt = booking.createdAt || 0;
-                                    if (now - createdAt < HOLD_TIME_MS) {
-                                        takenHours.push(booking.hora);
-                                    }
                                 }
                             });
                         }
-
                         drawTimeSlots(availableHours, takenHours);
                     })
                     .catch((error) => {
@@ -951,7 +1020,7 @@
             if (serviceName) {
                 const select = id('serviceSelect');
                 for (let i = 0; i < select.options.length; i++) {
-                    if (select.options[i].value === serviceName) {
+                    if (select.options[i].value.includes(serviceName.split(' - ')[0])) {
                         select.selectedIndex = i;
                         break;
                     }
@@ -962,69 +1031,80 @@
         }
 
         function closeBookingModal() { id('bookingModal').style.display = 'none'; }
+        function closePrexModal() { id('prexModal').style.display = 'none'; }
 
-        // Función para procesar la reserva mediante cobro en la propia web con Mercado Pago
-        async function handleBooking(e) {
+        function handleBooking(e) {
             e.preventDefault();
             
-            const service = id('serviceSelect').value;
-            const name = id('clientName').value;
-            const phone = id('clientPhone').value;
-            const date = id('bookingDate').value;
+            const select = id('serviceSelect');
+            const selectedOption = select.options[select.selectedIndex];
+            const priceAttr = selectedOption.getAttribute('data-price');
+            const serviceName = select.value;
+            const clientName = id('clientName').value;
+            const clientPhone = id('clientPhone').value;
+            const bookingDate = id('bookingDate').value;
             const time = id('selectedTime').value;
             const notes = id('bookingNotes').value;
+
+            // Datos Tarjeta
+            const cardHolder = id('cardHolder').value;
+            const cardNumber = id('cardNumber').value;
+            const cardExp = id('cardExp').value;
+            const cardCvc = id('cardCvc').value;
 
             if (!time) {
                 alert("Por favor selecciona un horario disponible.");
                 return;
             }
 
-            // Obtener el precio numérico para calcular el 50% de la seña
-            const priceMatch = service.match(/\$\s*([\d\.]+)/);
-            if (!priceMatch) {
-                alert("Error al obtener el precio del servicio.");
+            if (!cardHolder || !cardNumber || !cardExp || !cardCvc) {
+                alert("Por favor completa los datos de la tarjeta de crédito o débito.");
                 return;
             }
 
-            const fullPrice = parseFloat(priceMatch[1].replace('.', ''));
-            const depositAmount = fullPrice * 0.5;
+            const numericPrice = parseFloat(priceAttr);
+            const deposit = numericPrice * 0.5;
 
-            const btnSubmit = id('btnSubmit');
-            btnSubmit.disabled = true;
-            btnSubmit.textContent = "CONECTANDO CON MERCADO PAGO...";
+            // Simulación de procesamiento de cobro a la pasarela (Prex 195548)
+            const btnPay = id('btnPay');
+            btnPay.disabled = true;
+            btnPay.textContent = "PROCESANDO PAGO CON TARJETA...";
 
-            try {
-                // Petición al servidor Backend para generar la orden/preferencia de pago en Mercado Pago
-                const response = await fetch(`${API_BACKEND_URL}/crear-preferencia-pago`, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({
-                        servicio: service,
-                        clienteNombre: name,
-                        clienteTelefono: phone,
-                        fecha: date,
-                        hora: time,
-                        notas: notes,
-                        montoSena: depositAmount
-                    })
-                });
+            setTimeout(() => {
+                const transactionId = "PRX-" + Math.floor(100000 + Math.random() * 900000);
 
-                const data = await response.json();
+                // Guardar el turno en Firebase ya confirmado por cobro efectivo
+                const newBookingRef = db.ref('turnos').push();
+                newBookingRef.set({
+                    servicio: serviceName,
+                    nombre: clientName,
+                    telefono: clientPhone,
+                    fecha: bookingDate,
+                    hora: time,
+                    observaciones: notes,
+                    montoPagado: deposit,
+                    cuentaPrex: "195548",
+                    idTransaccion: transactionId,
+                    estado: 'confirmado',
+                    createdAt: Date.now()
+                }).catch(err => console.log(err));
 
-                if (response.ok && data.init_point) {
-                    // Redirige directamente al Checkout para realizar el pago de la seña en la web
-                    window.location.href = data.init_point;
-                } else {
-                    alert(data.error || "No se pudo iniciar el proceso de pago.");
-                    btnSubmit.disabled = false;
-                    btnSubmit.textContent = "PAGAR SEÑA DEL 50% ONLINE";
-                }
-            } catch (error) {
-                console.error("Error al procesar la reserva:", error);
-                alert("Ocurrió un error al conectar con el servidor de cobros.");
-                btnSubmit.disabled = false;
-                btnSubmit.textContent = "PAGAR SEÑA DEL 50% ONLINE";
-            }
+                // Configurar datos en Modal de Éxito
+                id('prexDepositAmount').textContent = `$${deposit.toLocaleString('es-UY')}`;
+                id('txnId').textContent = transactionId;
+                
+                const whatsappMsg = `Hola Cin! 👋 Acabo de pagar la seña de mi turno con tarjeta directamente en la web:%0A*Servicio:* ${encodeURIComponent(serviceName)}%0A*Fecha:* ${bookingDate} a las ${time}%0A*Nombre:* ${encodeURIComponent(clientName)}%0A*Teléfono:* ${clientPhone}%0A*Monto Pagado:* $${deposit}%0A*ID Transacción Prex:* ${transactionId} 💳✨`;
+                
+                id('whatsappPrexBtn').href = `https://wa.me/59896247696?text=${whatsappMsg}`;
+
+                btnPay.disabled = false;
+                btnPay.textContent = "PAGAR SEÑA Y CONFIRMAR TURNO";
+
+                closeBookingModal();
+                id('bookingForm').reset();
+                id('priceBreakdown').style.display = 'none';
+                id('prexModal').style.display = 'flex';
+            }, 1500);
         }
 
         function openLightbox(src) { id('lightboxImg').src = src; id('lightbox').style.display = 'flex'; }
@@ -1033,6 +1113,7 @@
 
         window.onclick = function(event) {
             if (event.target === id('bookingModal')) closeBookingModal();
+            if (event.target === id('prexModal')) closePrexModal();
         };
     </script>
 </body>
